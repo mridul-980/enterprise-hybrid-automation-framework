@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Hybrid Automation Suite">
+
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+    </listeners>
+
+    <test name="Regression Tests">
+
+        <classes>
+
+            <class name="tests.LoginTest"/>
+            <class name="tests.InventoryTest"/>
+
+        </classes>
+
+    </test>
+
+</suite>
