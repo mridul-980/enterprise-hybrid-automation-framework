@@ -25,13 +25,17 @@ public class GetUserAPITest {
 
     	Response response =
     	        UserEndpoints.getUser(1);
+    	ApiValidator.validateSuccessResponse(
+    	        response,
+    	        "user-schema.json");            // Validate the response using the ApiValidator utility class
+  /*
     	response.then()
         .spec(ResponseSpecs.successResponse());    // Use the successResponse() method from ResponseSpecs to validate the response
     	
     	SchemaUtils.validateSchema(
     	        response,
     	        "user-schema.json"); // Validate the response against the user-schema.json schema
-
+*/
     	UserResponse user =
     	        response.as(UserResponse.class); // Deserialization the JSON response into a UserResponse object
     	

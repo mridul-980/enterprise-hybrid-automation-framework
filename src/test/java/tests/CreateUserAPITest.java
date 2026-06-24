@@ -31,10 +31,14 @@ public class CreateUserAPITest {
 
 		Response response = UserEndpoints.createUser(payload);// Call the createUser() method from UserEndpoints to send a POST request to create a new user with the specified payload
 		System.out.println(response.getBody().asPrettyString());
+	/*	
 		response.then().spec(ResponseSpecs.createResponse());  // Use the createResponse() method from ResponseSpecs to validate the response
 
 		SchemaUtils.validateSchema(response, "create-user-schema.json"); // Validate the response against the create-user-schema.json schema
-
+   */
+		ApiValidator.validateCreateResponse(
+		        response,
+		        "create-user-schema.json");   // Validate the response using the ApiValidator utility class
 
 //        Assert.assertEquals(
 //                response.getStatusCode(), // Check the status code of the response

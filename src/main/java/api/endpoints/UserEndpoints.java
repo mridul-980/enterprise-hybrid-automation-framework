@@ -2,6 +2,8 @@ package api.endpoints;
 
 import static io.restassured.RestAssured.given;
 
+import java.util.Map;
+
 import api.models.UserPayload;
 import api.specs.BaseSpec;
 import io.restassured.response.Response;
@@ -11,7 +13,7 @@ import io.restassured.response.Response;
 
 public class UserEndpoints {
 
-    public static Response getUser(int userId) {
+    public static Response getUser(int userId) {    // Method to get a user by ID using GET request
 
         return
 
@@ -24,7 +26,7 @@ public class UserEndpoints {
                 .get("/users/" + userId);
     }
     
-    public static Response createUser(
+    public static Response createUser(      // Method to create a new user using POST request
             UserPayload payload) {
 
         return
@@ -40,7 +42,7 @@ public class UserEndpoints {
                 .post("/users");
     }
     
-    public static Response getUserWithAuth(
+    public static Response getUserWithAuth(     // Method to get a user with authentication using GET request
             int userId) {
 
         return
@@ -56,7 +58,7 @@ public class UserEndpoints {
                 .get("/users/" + userId);
     }
     
-    public static Response updateUser(
+    public static Response updateUser(          // Method to update a user using PUT request
             int userId,
             UserPayload payload) {
 
@@ -72,7 +74,7 @@ public class UserEndpoints {
 
                 .put("/users/" + userId);
     }
-    public static Response deleteUser(
+    public static Response deleteUser(        // Method to delete a user using DELETE request
             int userId) {
 
         return
@@ -84,5 +86,15 @@ public class UserEndpoints {
                 .when()
 
                 .delete("/users/" + userId);
+    }
+    public static Response patchUser(        // Method to partially update a user using PATCH request
+            int userId,
+            Map<String, Object> payload) {
+
+        return given()
+                .spec(BaseSpec.getRequestSpec())
+                .body(payload)
+                .when()
+                .patch("/users/" + userId);
     }
 }
