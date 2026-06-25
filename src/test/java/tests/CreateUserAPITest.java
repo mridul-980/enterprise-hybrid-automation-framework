@@ -8,6 +8,7 @@ import api.endpoints.UserEndpoints;
 import api.models.UserPayload;
 import api.utils.ApiUtils;
 import io.restassured.response.Response;
+import utilities.TestDataProvider;
 
 public class CreateUserAPITest {
 
@@ -18,16 +19,23 @@ public class CreateUserAPITest {
 		ApiUtils.setupBaseURI();
 	}
 
-	@Test
-
-	public void verifyCreateUserAPI() {
+	@Test(
+		    dataProvider = "userData",
+		    dataProviderClass = TestDataProvider.class    // Use the TestDataProvider class to provide test data for the test method
+		)
+		public void verifyCreateUserAPI(
+		        String name,
+		        String job) {
 
 		UserPayload payload = new UserPayload();
-
-		payload.setName("Mridul");
-
-		payload.setJob("QA Engineer");
-
+/*
+		payload.setName("Mridul");       // Set the name of the user in the payload
+		payload.setJob("QA Engineer");   // Set the job of the user in the payload
+*/
+		
+		payload.setName(name);          // Set the name of the user in the payload using the parameter from the data provider
+		payload.setJob(job);			// Set the job of the user in the payload using the parameter from the data provider
+		
 		Response response = UserEndpoints.createUser(payload);// Call the createUser() method from UserEndpoints to send a POST request to create a new user with the specified payload
 		System.out.println(response.getBody().asPrettyString());
 	/*	
@@ -42,6 +50,14 @@ public class CreateUserAPITest {
 //        Assert.assertEquals(
 //                response.getStatusCode(), // Check the status code of the response
 //                201);
-		Assert.assertEquals(response.jsonPath().getString("name"), "Mridul");
+//		Assert.assertEquals(response.jsonPath().getString("name"), "Mridul");    // Check if the name in the response matches the expected value
+		
+		Assert.assertEquals(
+		        response.jsonPath().getString("name"),           // Check if the name in the response matches the expected value
+		        name);
+
+		Assert.assertEquals(
+		        response.jsonPath().getString("job"),           // Check if the job in the response matches the expected value
+		        job);
 	}
 }
