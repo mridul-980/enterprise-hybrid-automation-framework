@@ -1,4 +1,4 @@
-package tests;
+package utilities;
 
 import api.specs.ResponseSpecs;
 import io.restassured.response.Response;

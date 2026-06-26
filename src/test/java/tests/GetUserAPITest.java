@@ -8,6 +8,7 @@ import api.endpoints.UserEndpoints;
 import api.models.UserResponse;
 import api.utils.ApiUtils;
 import io.restassured.response.Response;
+import utilities.ApiValidator;
 
 public class GetUserAPITest {
 

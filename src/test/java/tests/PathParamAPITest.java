@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import api.endpoints.UserEndpoints;
 import api.utils.ApiUtils;
 import io.restassured.response.Response;
+import utilities.ApiValidator;
 
 public class PathParamAPITest {
 

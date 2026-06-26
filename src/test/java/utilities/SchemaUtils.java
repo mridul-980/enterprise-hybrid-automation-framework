@@ -1,4 +1,4 @@
-package tests;
+package utilities;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
