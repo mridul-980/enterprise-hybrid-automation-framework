@@ -1,0 +1,15 @@
+target/
+test-output/
+logs/
+reports/
+screenshots/
+
+.git
+.settings
+.project
+.classpath
+
+.idea
+.vscode
+
+*.log

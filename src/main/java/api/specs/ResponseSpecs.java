@@ -22,7 +22,7 @@ public class ResponseSpecs {
 
     public static ResponseSpecification deleteResponse() {
         return new ResponseSpecBuilder()
-                .expectStatusCode(204)
+                .expectStatusCode(200)
                 .build();
     }
 }
