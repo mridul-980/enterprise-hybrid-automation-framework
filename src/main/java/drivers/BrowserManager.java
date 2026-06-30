@@ -8,6 +8,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import factory.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import utilities.ConfigReader;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class BrowserManager {
 
@@ -19,17 +25,38 @@ public class BrowserManager {
     	
     	switch (browser.toLowerCase()) {
     	case "chrome":
-    		
-    		WebDriverManager.chromedriver().setup();
-    		
-    		ChromeOptions chromeOptions = new ChromeOptions();
-    		
-    		if (headless) {
-    			chromeOptions.addArguments("--headless=new");
-    		}
-    		driver = new ChromeDriver(chromeOptions);
-    		
-    		break;
+
+    	    ChromeOptions chromeOptions = new ChromeOptions();
+
+    	    if (headless) {
+    	        chromeOptions.addArguments("--headless=new");
+    	    }
+
+    	    String execution = ConfigReader.getProperty("execution");
+
+    	    String remoteUrl = ConfigReader.getProperty("remoteUrl");
+
+    	    if ("remote".equalsIgnoreCase(execution)) {
+
+    	        try {
+
+    	            driver = new RemoteWebDriver(
+    	                    new URL(remoteUrl),
+    	                    chromeOptions);
+
+    	        } catch (MalformedURLException e) {
+
+    	            throw new RuntimeException(e);
+    	        }
+
+    	    } else {
+
+    	        WebDriverManager.chromedriver().setup();
+
+    	        driver = new ChromeDriver(chromeOptions);
+    	    }
+
+    	    break;
     		
     	case "firefox":
 
