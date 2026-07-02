@@ -1,4 +1,6 @@
-# 🚀 Enterprise Hybrid Automation Framework
+# Enterprise Hybrid Automation Framework
+
+![Enterprise Automation CI](https://github.com/mridul-980/enterprise-hybrid-automation-framework/actions/workflows/automation.yml/badge.svg)
 
 > A production-ready Hybrid Test Automation Framework built using **Java, Selenium WebDriver, TestNG, Rest Assured, Maven, Docker, Docker Compose, and Selenium Grid**.
 
