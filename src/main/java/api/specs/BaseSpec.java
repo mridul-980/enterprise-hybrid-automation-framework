@@ -1,7 +1,9 @@
 package api.specs;
 
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
+import io.qameta.allure.restassured.AllureRestAssured;
 
 /*
  * This class defines the base request specification for API tests.
@@ -27,14 +29,16 @@ centrally.
 
 public class BaseSpec {
 
-	public static RequestSpecification getRequestSpec() {
+    public static RequestSpecification getRequestSpec() {
 
-	    return new RequestSpecBuilder()
+        return new RequestSpecBuilder()
 
-	            .setContentType("application/json")
+                .setContentType("application/json")
 
-	            .log(io.restassured.filter.log.LogDetail.ALL)
+                .addFilter(new AllureRestAssured())
 
-	            .build();
-	}
+                .log(LogDetail.ALL)
+
+                .build();
+    }
 }

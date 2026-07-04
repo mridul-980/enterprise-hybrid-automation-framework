@@ -13,3 +13,6 @@ allure-report/
 .vscode/
 
 bin/
+
+# Screenshots
+screenshots/
