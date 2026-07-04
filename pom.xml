@@ -153,21 +153,7 @@
         </allure.results.directory>
     </systemPropertyVariables>
 
-    <properties>
-        <property>
-            <name>listener</name>
-            <value>io.qameta.allure.testng.AllureTestNg</value>
-        </property>
-    </properties>
-
 </configuration>
-
-    <properties>
-        <property>
-            <name>listener</name>
-            <value>io.qameta.allure.testng.AllureTestNg</value>
-        </property>
-    </properties>
 
 </plugin>
 </plugins>
