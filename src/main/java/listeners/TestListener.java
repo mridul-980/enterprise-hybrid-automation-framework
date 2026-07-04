@@ -1,12 +1,17 @@
 package listeners;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-
+import io.qameta.allure.Allure;
+import utilities.AllureUtils;
 import utilities.ExtentManager;
 import utilities.ScreenshotUtils;
 
@@ -59,18 +64,22 @@ public class TestListener implements ITestListener {
                 ScreenshotUtils.captureScreenshot(
                         result.getMethod().getMethodName());
 
+        // Attach to Allure
+        AllureUtils.attachScreenshot(screenshotPath);
+        AllureUtils.attachExecutionLog();
+
+        // Attach to Extent
         try {
-        	test.get().fail(
-        	        "Screenshot attached")
-        	        .addScreenCaptureFromPath(
-        	                screenshotPath);
+
+            test.get()
+                    .fail("Screenshot attached")
+                    .addScreenCaptureFromPath(screenshotPath);
 
         } catch (Exception e) {
 
             e.printStackTrace();
         }
     }
-
     @Override
     public void onTestSkipped(ITestResult result) {
 
