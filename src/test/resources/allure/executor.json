@@ -1,0 +1,7 @@
+{
+  "name": "Local Execution",
+  "type": "local",
+  "buildName": "Enterprise Hybrid Automation Framework",
+  "buildUrl": "http://localhost",
+  "reportName": "Allure Report"
+}

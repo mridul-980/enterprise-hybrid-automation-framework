@@ -16,3 +16,6 @@ bin/
 
 # Screenshots
 screenshots/
+
+target/
+allure-history/

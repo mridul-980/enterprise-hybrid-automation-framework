@@ -1,16 +1,15 @@
 package listeners;
 
-import java.io.IOException;
-import java.io.InputStream;
+
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import io.qameta.allure.Allure;
+
+import reporting.AllureReportMetadata;
 import utilities.AllureUtils;
 import utilities.ExtentManager;
 import utilities.ScreenshotUtils;
@@ -32,7 +31,9 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
-
+        AllureReportMetadata.copyEnvironmentFile();
+        AllureReportMetadata.copyExecutorFile();
+        AllureReportMetadata.copyCategoriesFile();
         extent.flush();
 
         System.out.println(

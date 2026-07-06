@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Assertion Failures",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*Assertion.*|.*expected.*but found.*"
+  },
+  {
+    "name": "Timeout Exceptions",
+    "matchedStatuses": ["failed"],
+    "traceRegex": ".*TimeoutException.*"
+  },
+  {
+    "name": "Element Not Found",
+    "matchedStatuses": ["failed"],
+    "traceRegex": ".*NoSuchElementException.*"
+  },
+  {
+    "name": "WebDriver Errors",
+    "matchedStatuses": ["broken"],
+    "traceRegex": ".*WebDriverException.*"
+  },
+  {
+    "name": "API Validation Errors",
+    "matchedStatuses": ["failed"],
+    "traceRegex": ".*AssertionError.*"
+  }
+]
