@@ -9,7 +9,6 @@ import drivers.BrowserManager;
 import factory.DriverFactory;
 import utilities.ConfigReader;
 import utilities.Log;
-import utilities.RuntimeConfig;
 public class BaseTest {
 
 	@BeforeMethod
@@ -19,9 +18,7 @@ public class BaseTest {
 
 	    Log.info("Browser setup started");
 
-	    BrowserManager.initializeBrowser(
-	            browser,
-	            RuntimeConfig.isHeadless());
+	    BrowserManager.initializeBrowser(browser);
 
 	    DriverFactory.getDriver()
 	            .get(ConfigReader.getProperty("url"));

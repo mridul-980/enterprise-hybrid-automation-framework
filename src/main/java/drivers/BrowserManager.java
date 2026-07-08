@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,48 +17,105 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import constants.ExecutionType;
 import factory.DriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import utilities.ConfigReader;
 import utilities.RuntimeConfig;
 
 public class BrowserManager {
 
-    public static void initializeBrowser(String browser, boolean headless) {
+    public static void initializeBrowser(String browser) {
 
         WebDriver driver = null;
 
-        ExecutionType execution = RuntimeConfig.getExecutionType();
-        String remoteUrl = RuntimeConfig.getRemoteUrl();
+        boolean maximize =
+                Boolean.parseBoolean(
+                        ConfigReader.getProperty("maximize"));
+
+        ExecutionType execution =
+                RuntimeConfig.getExecutionType();
+
+        String remoteUrl =
+                RuntimeConfig.getRemoteUrl();
 
         switch (browser.toLowerCase()) {
 
         case "chrome":
-            driver = createChromeDriver(headless, execution, remoteUrl);
+            driver = createChromeDriver(execution, remoteUrl);
             break;
 
         case "firefox":
-            driver = createFirefoxDriver(headless, execution, remoteUrl);
+            driver = createFirefoxDriver(execution, remoteUrl);
             break;
 
         case "edge":
-            driver = createEdgeDriver(headless, execution, remoteUrl);
+            driver = createEdgeDriver(execution, remoteUrl);
             break;
 
         default:
-            throw new IllegalArgumentException("Invalid Browser: " + browser);
+            throw new IllegalArgumentException(
+                    "Invalid Browser: " + browser);
         }
 
-        driver.manage().window().maximize();
+        if (maximize) {
+            driver.manage().window().maximize();
+        }
+
         DriverFactory.setDriver(driver);
     }
 
-    public static WebDriver createChromeDriver(
-            boolean headless,
+    private static WebDriver createChromeDriver(
             ExecutionType execution,
             String remoteUrl) {
 
         ChromeOptions options = new ChromeOptions();
 
+        boolean headless =
+                Boolean.parseBoolean(
+                        ConfigReader.getProperty("headless"));
+
+        boolean incognito =
+                Boolean.parseBoolean(
+                        ConfigReader.getProperty("incognito"));
+
+        boolean disableNotifications =
+                Boolean.parseBoolean(
+                        ConfigReader.getProperty("disable.notifications"));
+
+        boolean acceptInsecureCerts =
+                Boolean.parseBoolean(
+                        ConfigReader.getProperty("accept.insecure.certs"));
+
+        String pageLoadStrategy =
+                ConfigReader.getProperty("page.load.strategy");
+
         if (headless) {
             options.addArguments("--headless=new");
+        }
+
+        if (incognito) {
+            options.addArguments("--incognito");
+        }
+
+        if (disableNotifications) {
+            options.addArguments("--disable-notifications");
+        }
+
+        if (acceptInsecureCerts) {
+            options.setAcceptInsecureCerts(true);
+        }
+
+        switch (pageLoadStrategy.toLowerCase()) {
+
+        case "eager":
+            options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+            break;
+
+        case "none":
+            options.setPageLoadStrategy(PageLoadStrategy.NONE);
+            break;
+
+        default:
+            options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+            break;
         }
 
         if (execution == ExecutionType.REMOTE) {
@@ -68,12 +126,15 @@ public class BrowserManager {
         return new ChromeDriver(options);
     }
 
-    public static WebDriver createFirefoxDriver(
-            boolean headless,
+    private static WebDriver createFirefoxDriver(
             ExecutionType execution,
             String remoteUrl) {
 
         FirefoxOptions options = new FirefoxOptions();
+
+        boolean headless =
+                Boolean.parseBoolean(
+                        ConfigReader.getProperty("headless"));
 
         if (headless) {
             options.addArguments("--headless");
@@ -87,12 +148,15 @@ public class BrowserManager {
         return new FirefoxDriver(options);
     }
 
-    public static WebDriver createEdgeDriver(
-            boolean headless,
+    private static WebDriver createEdgeDriver(
             ExecutionType execution,
             String remoteUrl) {
 
         EdgeOptions options = new EdgeOptions();
+
+        boolean headless =
+                Boolean.parseBoolean(
+                        ConfigReader.getProperty("headless"));
 
         if (headless) {
             options.addArguments("--headless=new");
