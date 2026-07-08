@@ -7,12 +7,10 @@ import base.BaseTest;
 import pages.InventoryPage;
 import pages.LoginPage;
 import utilities.ConfigReader;
-import listeners.RetryAnalyzer;
 
 public class LoginTest extends BaseTest {
 
-    @Test (retryAnalyzer = RetryAnalyzer.class)
-
+    @Test 
     public void verifySuccessfulLogin() {
 
         LoginPage loginPage =
