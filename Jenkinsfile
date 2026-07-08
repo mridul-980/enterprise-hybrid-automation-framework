@@ -2,47 +2,45 @@ pipeline {
 
     agent any
 
-    parameters {
+    tools {
+        jdk 'JDK17'
+        maven 'Maven'
+    }
 
-        choice(
-            name: 'BROWSER',
-            choices: ['chrome', 'edge'],
-            description: 'Select Browser'
-        )
-
-        choice(
-            name: 'ENV',
-            choices: ['qa', 'uat'],
-            description: 'Select Environment'
-        )
-
-        choice(
-            name: 'HEADLESS',
-            choices: ['true', 'false'],
-            description: 'Run in Headless Mode'
-        )
+    options {
+        timestamps()
+        disableConcurrentBuilds()
     }
 
     stages {
 
         stage('Checkout') {
-
             steps {
-
-                echo 'Pipeline Started'
+                checkout scm
             }
         }
 
-        stage('Execute Tests') {
-
+        stage('Build') {
             steps {
+                bat 'mvn clean compile'
+            }
+        }
 
-                bat """
-                mvn clean test ^
-                -Dbrowser=%BROWSER% ^
-                -Denv=%ENV% ^
-                -Dheadless=%HEADLESS%
-                """
+        stage('Run Tests') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+
+        stage('Generate Allure Report') {
+            steps {
+                bat 'allure generate target/allure-results --clean -o target/allure-report'
+            }
+        }
+
+        stage('Archive Reports') {
+            steps {
+                archiveArtifacts artifacts: 'target/allure-report/**', fingerprint: true
             }
         }
     }
@@ -51,17 +49,19 @@ pipeline {
 
         always {
 
-            echo 'Pipeline Execution Finished'
+            junit 'target/surefire-reports/*.xml'
+
+            echo 'Pipeline execution completed.'
         }
 
         success {
 
-            echo 'Tests Passed'
+            echo 'Build Successful.'
         }
 
         failure {
 
-            echo 'Tests Failed'
+            echo 'Build Failed.'
         }
     }
 }
