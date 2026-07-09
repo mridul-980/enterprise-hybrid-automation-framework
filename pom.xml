@@ -13,7 +13,7 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonar.projectKey>enterprise-hybrid-automation-framework</sonar.projectKey>
+<sonar.projectKey>Enterprise-Hybrid-Automation-Framework</sonar.projectKey>
 <sonar.projectName>Enterprise Hybrid Automation Framework</sonar.projectName>
 <sonar.host.url>http://localhost:9000</sonar.host.url>
 	</properties>
