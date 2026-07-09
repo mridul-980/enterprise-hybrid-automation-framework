@@ -13,6 +13,9 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sonar.projectKey>enterprise-hybrid-automation-framework</sonar.projectKey>
+<sonar.projectName>Enterprise Hybrid Automation Framework</sonar.projectName>
+<sonar.host.url>http://localhost:9000</sonar.host.url>
 	</properties>
 
 	<dependencies>
@@ -134,29 +137,41 @@
 	</dependencies>
 
 <build>
-<plugins>
-<plugin>
+    <plugins>
 
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-surefire-plugin</artifactId>
-    <version>3.2.5</version>
+        <!-- Surefire Plugin -->
+        <plugin>
 
-<configuration>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.2.5</version>
 
-    <suiteXmlFiles>
-        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
-    </suiteXmlFiles>
+            <configuration>
 
-    <systemPropertyVariables>
-        <allure.results.directory>
-            ${project.build.directory}/allure-results
-        </allure.results.directory>
-    </systemPropertyVariables>
+                <suiteXmlFiles>
+                    <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                </suiteXmlFiles>
 
-</configuration>
+                <systemPropertyVariables>
+                    <allure.results.directory>
+                        ${project.build.directory}/allure-results
+                    </allure.results.directory>
+                </systemPropertyVariables>
 
-</plugin>
-</plugins>
+            </configuration>
+
+        </plugin>
+
+        <!-- SonarQube Maven Plugin -->
+        <plugin>
+
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>5.1.0.4751</version>
+
+        </plugin>
+
+    </plugins>
 </build>
 
 </project>

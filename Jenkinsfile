@@ -59,16 +59,16 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                bat 'mvn clean compile'
-            }
-        }
+     stage('Build') {
+    steps {
+        bat 'mvn clean compile -DskipTests'
+    }
+}
 
         stage('Run Tests') {
             steps {
                bat """
-mvn clean test ^
+mvn test ^
 -Dbrowser=%BROWSER% ^
 -Denv=%ENV% ^
 -Dexecution=%EXECUTION% ^
@@ -76,6 +76,21 @@ mvn clean test ^
 """
             }
         }
+stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('SonarQube') {
+            withCredentials([string(
+                    credentialsId: 'sonarqube-token',
+                    variable: 'SONAR_TOKEN')]) {
+
+              bat """
+mvn verify sonar:sonar ^
+-Dsonar.token=%SONAR_TOKEN%
+"""
+            }
+        }
+    }
+}
 
         stage('Generate Allure Report') {
             steps {
