@@ -91,6 +91,11 @@ mvn verify sonar:sonar ^
         }
     }
 }
+stage('Checkstyle') {
+    steps {
+        bat 'mvn checkstyle:checkstyle'
+    }
+}
 
         stage('Generate Allure Report') {
             steps {
@@ -105,23 +110,30 @@ mvn verify sonar:sonar ^
         }
     }
 
-    post {
+post {
 
-        always {
+    always {
 
-            junit 'target/surefire-reports/*.xml'
+        junit 'target/surefire-reports/*.xml'
 
-            echo 'Pipeline execution completed.'
-        }
+    recordIssues(
+    enabledForFailure: true,
+    tools: [
+        checkStyle(pattern: '**/target/checkstyle-result.xml')
+    ]
+)
 
-        success {
-
-            echo 'Build Successful.'
-        }
-
-        failure {
-
-            echo 'Build Failed.'
-        }
+        echo 'Pipeline execution completed.'
     }
+
+    success {
+
+        echo 'Build Successful.'
+    }
+
+    failure {
+
+        echo 'Build Failed.'
+    }
+}
 }
