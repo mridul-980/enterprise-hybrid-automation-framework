@@ -1,6 +1,28 @@
 pipeline {
 
     agent any
+    parameters {
+
+    choice(
+        name: 'BROWSER',
+        choices: ['chrome', 'firefox', 'edge'],
+        description: 'Select browser')
+
+    choice(
+        name: 'ENV',
+        choices: ['qa', 'uat'],
+        description: 'Select environment')
+
+    choice(
+        name: 'EXECUTION',
+        choices: ['local', 'remote'],
+        description: 'Execution type')
+
+    booleanParam(
+        name: 'HEADLESS',
+        defaultValue: true,
+        description: 'Run browser in headless mode')
+}
 
    tools {
     maven 'Maven-3.9.16'
@@ -13,6 +35,23 @@ pipeline {
     }
 
     stages {
+		
+		stage('Initialize') {
+
+    steps {
+
+        script {
+
+            currentBuild.displayName =
+                    "#${BUILD_NUMBER} | ${params.BROWSER} | ${params.ENV}"
+
+            echo "Browser   : ${params.BROWSER}"
+            echo "Environment : ${params.ENV}"
+            echo "Execution : ${params.EXECUTION}"
+            echo "Headless  : ${params.HEADLESS}"
+        }
+    }
+}
 
         stage('Checkout') {
             steps {
@@ -28,7 +67,13 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'mvn test'
+               bat """
+mvn clean test ^
+-Dbrowser=%BROWSER% ^
+-Denv=%ENV% ^
+-Dexecution=%EXECUTION% ^
+-Dheadless=%HEADLESS%
+"""
             }
         }
 

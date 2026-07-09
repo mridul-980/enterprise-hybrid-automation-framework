@@ -8,22 +8,6 @@ public class ConfigReader {
 
     private static Properties properties;
 
-//    static {
-//
-//        try {
-// It reads the config.properties file located in src/test/resources/configs and loads its key-value pairs into a Properties object for easy access throughout the framework.
-//            FileInputStream fis = new FileInputStream(
-//                    System.getProperty("user.dir")
-//                            + "/src/test/resources/configs/config.properties");
-//
-//            properties = new Properties();
-//            properties.load(fis);
-//
-//        } catch (IOException e) {
-//
-//            e.printStackTrace();
-//        }
-//    }
     static {
 
         properties = new Properties();
@@ -52,6 +36,12 @@ public class ConfigReader {
     }
 
     public static String getProperty(String key) {
+
+        String systemValue = System.getProperty(key);
+
+        if (systemValue != null) {
+            return systemValue;
+        }
 
         return properties.getProperty(key);
     }
