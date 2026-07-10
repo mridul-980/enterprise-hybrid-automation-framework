@@ -178,7 +178,7 @@
 
     <configuration>
         <configLocation>checkstyle.xml</configLocation>
-        <encoding>UTF-</encoding>
+        <encoding>UTF-8</encoding>
         <consoleOutput>true</consoleOutput>
         <failsOnError>false</failsOnError>
     </configuration>
