@@ -255,7 +255,7 @@ N --> P[Checkstyle]
 N --> Q[PMD]
 N --> R[GitHub Actions]
 ```
-````markdown
+
 ### Key Components
 
 | Layer | Responsibility |
@@ -277,29 +277,51 @@ N --> R[GitHub Actions]
 
 # 🔄 CI/CD Pipeline
 
-The following pipeline illustrates the end-to-end continuous integration workflow, from code commit to automated quality validation and report generation.
+The following diagram illustrates the end-to-end Continuous Integration and Continuous Delivery (CI/CD) workflow for the Enterprise Hybrid Automation Framework.
+
 ```mermaid
 flowchart TD
 
-A[Developer]
-A --> B[Git Push]
-B --> C[GitHub Repository]
+    A[Developer]
+    B[Git Push]
+    C[GitHub Repository]
 
-C --> D[GitHub Actions]
-C --> E[Jenkins Pipeline]
+    D[GitHub Actions]
+    E[Jenkins Pipeline]
 
-D --> F1[Build & Execute Tests]
-E --> F2[Parameterized Pipeline]
+    F[Maven Build]
+    G[Execute UI Tests]
+    H[Execute API Tests]
 
-F1 --> G[Allure Reports]
-F2 --> G
+    I[Generate Allure Report]
 
-G --> H[SonarQube]
-H --> I[Checkstyle]
-I --> J[PMD]
-J --> K[Archive Artifacts]
-K --> L[Build Complete]
+    J[SonarQube Analysis]
+    K[Checkstyle Validation]
+    L[PMD Analysis]
+
+    M[Archive Artifacts]
+    N[Build Complete]
+
+    A --> B
+    B --> C
+
+    C --> D
+    C --> E
+
+    D --> F
+    E --> F
+
+    F --> G
+    G --> H
+    H --> I
+
+    I --> J
+    J --> K
+    K --> L
+    L --> M
+    M --> N
 ```
+
 ### Pipeline Stages
 
 | Stage | Description |
@@ -307,16 +329,14 @@ K --> L[Build Complete]
 | Git Push | Source code committed to GitHub |
 | GitHub Actions | Automatically triggers workflow on every push |
 | Jenkins Pipeline | Parameterized CI/CD execution |
-| Maven Build | Dependency resolution and project compilation |
-| UI Automation | Selenium WebDriver test execution |
-| API Automation | REST Assured test execution |
-| Allure Reports | Rich HTML execution reports |
+| Maven Build | Project compilation and dependency management |
+| UI Automation | Selenium WebDriver execution |
+| API Automation | REST Assured execution |
+| Allure Reports | Rich HTML reporting |
 | SonarQube | Static code quality analysis |
-| Checkstyle | Java coding standards validation |
-| PMD | Static code analysis and best practices |
-| Artifact Archiving | Stores reports and build outputs for future reference |
-
----
+| Checkstyle | Coding standards validation |
+| PMD | Static code analysis |
+| Artifact Archiving | Stores reports and build outputs |
 
 # 📂 Project Structure
 
@@ -427,12 +447,16 @@ http://localhost:4444
 
 ---
 
-# 📊 Reports
+# 📊 Reports & Code Quality
 
-- Extent Reports
-- TestNG Reports
-- Screenshots on Failure
-- Log4j2 Logs
+- ✅ Allure Reports
+- ✅ TestNG Reports
+- ✅ Screenshots on Failure
+- ✅ Execution Logs (Log4j2)
+- ✅ SonarQube Analysis
+- ✅ Checkstyle Validation
+- ✅ PMD Static Analysis
+- ✅ Jenkins Build Artifacts
 
 ---
 
@@ -445,16 +469,15 @@ http://localhost:4444
 
 ---
 
-# 🚀 Future Enhancements
+# 🚀 Roadmap
 
-- Parallel Cross-Browser Execution
-- GitHub Actions CI/CD
-- Allure Reporting
-- Browser Matrix Execution
-- Database Testing
-- Performance Testing
-- Cloud Selenium Grid
-- AI-powered Test Reporting
+### Version 5.0
+
+- 🚧 JDBC Database Testing
+- 🚧 Cloud Selenium Grid
+- 🚧 BrowserStack / LambdaTest Integration
+- 🚧 Performance Testing
+- 🚧 AI-assisted Test Insights
 
 ---
 
@@ -464,9 +487,9 @@ http://localhost:4444
 
 Software QA Engineer | SDET | Test Automation Engineer
 
-GitHub:
-
-https://github.com/mridul-980/enterprise-hybrid-automation-framework
+- GitHub: https://github.com/mridul-980
+- LinkedIn: https://www.linkedin.com/in/mridul-tripathi-32ab3921b/
+- Email: mridultripathi024@gmail.com
 
 ---
 
