@@ -123,9 +123,25 @@ post {
 
 recordIssues(
     enabledForFailure: true,
+
+    qualityGates: [
+
+        [
+            threshold: 150,
+            type: 'TOTAL',
+            unstable: true
+        ]
+
+    ],
+
     tools: [
-        checkStyle(pattern: '**/target/checkstyle-result.xml'),
-        pmdParser(pattern: '**/target/pmd.xml')
+
+        checkStyle(
+            pattern: '**/target/checkstyle-result.xml'),
+
+        pmdParser(
+            pattern: '**/target/pmd.xml')
+
     ]
 )
 
