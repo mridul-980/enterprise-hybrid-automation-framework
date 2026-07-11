@@ -1,12 +1,49 @@
-# Enterprise Hybrid Automation Framework
+# 🚀 Enterprise Hybrid Automation Framework
 
 ![Enterprise Automation CI](https://github.com/mridul-980/enterprise-hybrid-automation-framework/actions/workflows/automation.yml/badge.svg)
 
-> A production-ready Hybrid Test Automation Framework built using **Java, Selenium WebDriver, TestNG, Rest Assured, Maven, Docker, Docker Compose, and Selenium Grid**.
+> **A production-ready Enterprise Hybrid Test Automation Framework built using Java, Selenium WebDriver, TestNG, REST Assured, Docker, Selenium Grid, Jenkins, GitHub Actions, SonarQube, Checkstyle, PMD, and Allure Reporting.**
 
-This framework supports **UI Automation**, **API Automation**, **Local & Remote Execution**, **Dockerized Test Execution**, and follows enterprise automation best practices with a scalable, maintainable architecture.
+Designed with **scalability**, **maintainability**, and **enterprise engineering best practices**, this framework supports end-to-end automation across UI, API, and containerized environments while integrating modern CI/CD and code quality tools.
 
 ---
+
+## ✨ Key Highlights
+
+- ✅ Enterprise-grade UI Automation Framework
+- ✅ REST API Automation using REST Assured
+- ✅ Cross-Browser & Parallel Test Execution
+- ✅ Local & Remote Execution (Selenium Grid)
+- ✅ Docker & Docker Compose Integration
+- ✅ Jenkins CI/CD Pipeline
+- ✅ GitHub Actions Workflow
+- ✅ SonarQube Static Code Analysis
+- ✅ Checkstyle & PMD Quality Validation
+- ✅ Allure Reporting with Execution Trends
+- ✅ Thread-safe Driver Management
+- ✅ Modular, Scalable & Maintainable Framework Architecture
+
+---
+
+# 📖 About the Framework
+
+Modern enterprise automation is more than writing Selenium scripts.
+
+This project demonstrates how a scalable automation framework can be designed using software engineering principles and integrated with modern DevOps practices.
+
+The framework combines:
+
+- UI Automation
+- API Automation
+- Containerized Test Execution
+- CI/CD Pipelines
+- Static Code Analysis
+- Rich Test Reporting
+
+to provide a maintainable and production-ready automation solution.
+
+The project has been built with a focus on **clean architecture**, **reusability**, **parallel execution**, **configuration-driven execution**, and **continuous quality validation**.
+
 
 ## 📌 Features
 
