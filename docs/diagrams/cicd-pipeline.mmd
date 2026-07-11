@@ -1,0 +1,22 @@
+```mermaid
+flowchart TD
+
+A[Developer]
+A --> B[Git Push]
+B --> C[GitHub Repository]
+
+C --> D[GitHub Actions]
+C --> E[Jenkins Pipeline]
+
+D --> F1[Build & Execute Tests]
+E --> F2[Parameterized Pipeline]
+
+F1 --> G[Allure Reports]
+F2 --> G
+
+G --> H[SonarQube]
+H --> I[Checkstyle]
+I --> J[PMD]
+J --> K[Archive Artifacts]
+K --> L[Build Complete]
+```
