@@ -1,0 +1,39 @@
+```mermaid
+flowchart TD
+
+A[TestNG Suite]
+
+A --> B[UI Test Suite]
+A --> C[API Test Suite]
+
+B --> D[BaseTest]
+C --> D
+
+D --> E[DriverFactory]
+
+E --> F[BrowserManager]
+
+F --> G[Chrome]
+F --> H[Firefox]
+F --> I[Edge]
+
+G --> J[Local Execution]
+H --> J
+I --> J
+
+G --> K[Selenium Grid]
+H --> K
+I --> K
+
+K --> L[Docker Containers]
+
+J --> M[Allure Reports]
+L --> M
+
+M --> N[Jenkins Pipeline]
+
+N --> O[SonarQube]
+N --> P[Checkstyle]
+N --> Q[PMD]
+N --> R[GitHub Actions]
+```

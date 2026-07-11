@@ -45,19 +45,73 @@ to provide a maintainable and production-ready automation solution.
 The project has been built with a focus on **clean architecture**, **reusability**, **parallel execution**, **configuration-driven execution**, and **continuous quality validation**.
 
 
-## 📌 Features
+# ✨ Features
 
-### ✅ UI Automation
+## 🖥️ UI Automation
 
-- Selenium WebDriver
+- Selenium WebDriver 4
 - Java 17
-- TestNG
+- TestNG Framework
 - Page Object Model (POM)
-- ThreadLocal WebDriver
-- Cross Browser Support
+- Cross-Browser Testing
 - Local & Remote Execution
 - Selenium Grid Integration
+- Parallel Test Execution
+- Thread-safe Driver Management
+- Smart Retry Mechanism
+- Screenshot Capture on Failure
+
+---
+
+## 🌐 API Automation
+
+- REST Assured
+- GET, POST, PUT, PATCH & DELETE APIs
+- Authentication Support
+- Request & Response Specifications
+- Path & Query Parameters
+- Serialization & Deserialization
+- JSON Schema Validation
+- Generic API Client
+
+---
+
+## ⚙️ Framework Design
+
+- Factory Design Pattern
+- Configuration-driven Execution
+- Environment Management
+- Runtime Configuration
+- Reusable Utility Classes
+- ThreadLocal WebDriver
+- Logging with Log4j2
+- Modular & Scalable Architecture
+
+---
+
+## 🚀 DevOps & CI/CD
+
+- Git & GitHub
+- GitHub Actions
+- Jenkins Declarative Pipeline
+- Parameterized Jenkins Builds
+- Docker Integration
 - Docker Compose
+- Selenium Grid
+- Build Artifact Archiving
+
+---
+
+## 📊 Reporting & Quality Engineering
+
+- Allure Reports
+- TestNG Reports
+- Execution Logs
+- SonarQube Code Analysis
+- Checkstyle Validation
+- PMD Static Analysis
+- Jenkins Quality Gates
+- Build Stability Monitoring
 
 ---
 
@@ -102,6 +156,64 @@ The project has been built with a focus on **clean architecture**, **reusability
 - Jenkins Ready
 
 ---
+# 🏗️ Enterprise Automation Ecosystem
+
+```mermaid
+flowchart TD
+
+A[TestNG Suite]
+
+A --> B[UI Test Suite]
+A --> C[API Test Suite]
+
+B --> D[BaseTest]
+C --> D
+
+D --> E[DriverFactory]
+
+E --> F[BrowserManager]
+
+F --> G[Chrome]
+F --> H[Firefox]
+F --> I[Edge]
+
+G --> J[Local Execution]
+H --> J
+I --> J
+
+G --> K[Selenium Grid]
+H --> K
+I --> K
+
+K --> L[Docker Containers]
+
+J --> M[Allure Reports]
+L --> M
+
+M --> N[Jenkins Pipeline]
+
+N --> O[SonarQube]
+N --> P[Checkstyle]
+N --> Q[PMD]
+N --> R[GitHub Actions]
+```
+````markdown
+### Key Components
+
+| Layer | Responsibility |
+|--------|----------------|
+| TestNG | Test execution engine |
+| UI Automation | Selenium-based functional testing |
+| API Automation | REST Assured API validation |
+| DriverFactory | Thread-safe WebDriver lifecycle |
+| BrowserManager | Browser initialization & configuration |
+| Selenium Grid | Distributed remote execution |
+| Docker | Containerized execution environment |
+| Jenkins | CI/CD orchestration |
+| SonarQube | Code quality analysis |
+| Checkstyle | Coding standards validation |
+| PMD | Static code analysis |
+| Allure | Rich reporting & execution history |
 
 # 🏗 Framework Architecture
 
@@ -123,22 +235,23 @@ The project has been built with a focus on **clean architecture**, **reusability
 
 ---
 
-# 🛠 Tech Stack
+# 🛠️ Technology Stack
 
-| Category | Technology |
-|----------|------------|
-| Language | Java 17 |
-| UI Automation | Selenium WebDriver |
-| API Automation | Rest Assured |
-| Testing | TestNG |
+| Category | Technologies |
+|----------|--------------|
+| Programming Language | Java 17 |
+| UI Automation | Selenium WebDriver 4 |
+| API Automation | REST Assured |
+| Test Framework | TestNG |
 | Build Tool | Maven |
-| Design Pattern | Factory Pattern |
+| Design Patterns | Page Object Model, Factory Pattern, Singleton |
 | Logging | Log4j2 |
-| Reporting | Extent Reports |
-| Containerization | Docker |
-| Orchestration | Docker Compose |
-| Grid | Selenium Grid |
-| CI/CD | Jenkins |
+| Reporting | Allure Reports, TestNG Reports |
+| Containerization | Docker, Docker Compose |
+| Cross-Browser Testing | Selenium Grid |
+| CI/CD | Jenkins, GitHub Actions |
+| Code Quality | SonarQube, Checkstyle, PMD |
+| Version Control | Git, GitHub |
 
 ---
 
