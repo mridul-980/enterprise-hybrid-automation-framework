@@ -107,14 +107,19 @@ stage('PMD Analysis') {
         allure(
             includeProperties: false,
             jdk: '',
+            commandline: 'Allure',
             results: [[path: 'target/allure-results']]
         )
     }
 }
 
-     stage('Archive Reports') {
+stage('Archive Reports') {
     steps {
-        archiveArtifacts artifacts: 'target/screenshots/**', fingerprint: true
+        archiveArtifacts(
+            artifacts: 'target/screenshots/**',
+            fingerprint: true,
+            allowEmptyArchive: true
+        )
     }
 }
     }
