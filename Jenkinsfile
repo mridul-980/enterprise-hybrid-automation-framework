@@ -96,6 +96,11 @@ stage('Checkstyle') {
         bat 'mvn checkstyle:checkstyle'
     }
 }
+stage('PMD Analysis') {
+    steps {
+        bat 'mvn pmd:pmd'
+    }
+}
 
         stage('Generate Allure Report') {
             steps {
@@ -116,10 +121,11 @@ post {
 
         junit 'target/surefire-reports/*.xml'
 
-    recordIssues(
+recordIssues(
     enabledForFailure: true,
     tools: [
-        checkStyle(pattern: '**/target/checkstyle-result.xml')
+        checkStyle(pattern: '**/target/checkstyle-result.xml'),
+        pmdParser(pattern: '**/target/pmd.xml')
     ]
 )
 
