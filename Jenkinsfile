@@ -102,17 +102,21 @@ stage('PMD Analysis') {
     }
 }
 
-        stage('Generate Allure Report') {
-            steps {
-                bat 'allure generate target/allure-results --clean -o target/allure-report'
-            }
-        }
+      stage('Publish Allure Report') {
+    steps {
+        allure(
+            includeProperties: false,
+            jdk: '',
+            results: [[path: 'target/allure-results']]
+        )
+    }
+}
 
-        stage('Archive Reports') {
-            steps {
-                archiveArtifacts artifacts: 'target/allure-report/**', fingerprint: true
-            }
-        }
+     stage('Archive Reports') {
+    steps {
+        archiveArtifacts artifacts: 'target/screenshots/**', fingerprint: true
+    }
+}
     }
 
 post {
