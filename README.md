@@ -156,6 +156,8 @@ The project has been built with a focus on **clean architecture**, **reusability
 - Jenkins Ready
 
 ---
+The following diagram illustrates the overall architecture of the Enterprise Hybrid Automation Framework, including test execution, browser management, CI/CD integration, reporting, and quality engineering components.
+
 # 🏗️ Enterprise Automation Ecosystem
 
 ```mermaid
@@ -215,45 +217,101 @@ N --> R[GitHub Actions]
 | PMD | Static code analysis |
 | Allure | Rich reporting & execution history |
 
-# 🏗 Framework Architecture
+---
 
-```text
-                 BaseTest
-                     │
-             BrowserManager
-                     │
-             BrowserFactory
-                     │
-         ┌───────────┴───────────┐
-         │                       │
-    Local Driver           Remote Driver
-         │                       │
- Chrome / Edge / Firefox    Selenium Grid
-                                     │
-                              Docker Container
+# 🔄 CI/CD Pipeline
+
+The following pipeline illustrates the end-to-end continuous integration workflow, from code commit to automated quality validation and report generation.
+
+```mermaid
+flowchart TD
+
+A[Developer]
+
+A --> B[Git Push]
+
+B --> C[GitHub Repository]
+
+C --> D[GitHub Actions]
+
+C --> E[Jenkins Pipeline]
+
+D --> F1[Build & Execute Tests]
+
+E --> F2[Parameterized Pipeline]
+
+F1 --> G[Allure Reports]
+F2 --> G
+
+G --> H[SonarQube]
+
+H --> I[Checkstyle]
+
+I --> J[PMD]
+
+J --> K[Archive Artifacts]
+
+K --> L[Build Complete]
 ```
+### Pipeline Stages
 
+| Stage | Description |
+|--------|-------------|
+| Git Push | Source code committed to GitHub |
+| GitHub Actions | Automatically triggers workflow on every push |
+| Jenkins Pipeline | Parameterized CI/CD execution |
+| Maven Build | Dependency resolution and project compilation |
+| UI Automation | Selenium WebDriver test execution |
+| API Automation | REST Assured test execution |
+| Allure Reports | Rich HTML execution reports |
+| SonarQube | Static code quality analysis |
+| Checkstyle | Java coding standards validation |
+| PMD | Static code analysis and best practices |
+| Artifact Archiving | Stores reports and build outputs for future reference |
 ---
 
 # 🛠️ Technology Stack
 
 | Category | Technologies |
 |----------|--------------|
-| Programming Language | Java 17 |
-| UI Automation | Selenium WebDriver 4 |
-| API Automation | REST Assured |
-| Test Framework | TestNG |
-| Build Tool | Maven |
-| Design Patterns | Page Object Model, Factory Pattern, Singleton |
-| Logging | Log4j2 |
-| Reporting | Allure Reports, TestNG Reports |
-| Containerization | Docker, Docker Compose |
-| Cross-Browser Testing | Selenium Grid |
-| CI/CD | Jenkins, GitHub Actions |
-| Code Quality | SonarQube, Checkstyle, PMD |
-| Version Control | Git, GitHub |
+| **Programming Language** | Java 17 |
+| **UI Automation** | Selenium WebDriver 4 |
+| **API Automation** | REST Assured |
+| **Test Framework** | TestNG |
+| **Build & Dependency Management** | Maven |
+| **Design Patterns** | Page Object Model (POM), Factory Pattern, Singleton, ThreadLocal |
+| **Configuration Management** | Properties Files, Runtime Configuration |
+| **Reporting** | Allure Reports, TestNG Reports |
+| **Logging** | Log4j2 |
+| **Containerization** | Docker, Docker Compose |
+| **Cross-Browser Execution** | Selenium Grid |
+| **CI/CD** | Jenkins, GitHub Actions |
+| **Code Quality** | SonarQube, Checkstyle, PMD |
+| **Version Control** | Git, GitHub |
+| **Development Tools** | IntelliJ IDEA / Eclipse, VS Code |
+| **Database** | PostgreSQL *(JDBC integration planned)* |
+| **Operating System** | Windows 11 |
 
 ---
+# 🎯 Enterprise Capabilities
+
+| Capability | Status |
+|------------|:------:|
+| UI Automation | ✅ |
+| API Automation | ✅ |
+| Cross-Browser Testing | ✅ |
+| Parallel Execution | ✅ |
+| Selenium Grid | ✅ |
+| Docker Execution | ✅ |
+| Jenkins Pipeline | ✅ |
+| GitHub Actions | ✅ |
+| SonarQube Analysis | ✅ |
+| Checkstyle | ✅ |
+| PMD | ✅ |
+| Allure Reporting | ✅ |
+| Thread-safe Execution | ✅ |
+| Database Testing (JDBC) | 🚧 Planned |
+| Cloud Grid Integration | 🚧 Planned |
 
 # 📂 Project Structure
 
