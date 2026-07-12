@@ -353,30 +353,28 @@ flowchart TD
 # 📂 Project Structure
 
 ```text
-enterprise-hybrid-automation-framework
+src
+├── main
+│   ├── java
+│   │   ├── api          → REST Assured client & endpoint classes
+│   │   ├── auth         → Authentication utilities
+│   │   ├── constants    → Framework constants
+│   │   ├── drivers      → WebDriver management
+│   │   ├── factory      → Driver & Browser Factory
+│   │   ├── listeners    → TestNG listeners
+│   │   ├── pages        → Page Object Model classes
+│   │   ├── specs        → Request & Response Specifications
+│   │   └── utilities    → Common reusable utilities
+│   │
+│   ├── resources
+│   │   ├── config
+│   │   ├── schemas
+│   │   └── testdata
 │
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   ├── api
-│   │   │   ├── auth
-│   │   │   ├── constants
-│   │   │   ├── drivers
-│   │   │   ├── factory
-│   │   │   ├── listeners
-│   │   │   ├── pages
-│   │   │   ├── specs
-│   │   │   └── utilities
-│   │
-│   ├── test
-│   │   ├── java
-│   │   │   ├── tests
-│   │   │   └── testdata
-│   │
-│   └── resources
-│       ├── config
-│       ├── schemas
-│       └── testdata
+├── test
+│   ├── java
+│   │   ├── tests
+│   │   └── testdata
 │
 ├── Dockerfile
 ├── docker-compose.yml
@@ -384,6 +382,21 @@ enterprise-hybrid-automation-framework
 ├── pom.xml
 └── README.md
 ```
+### 📦 Package Responsibilities
+
+| Package | Responsibility |
+|---------|----------------|
+| api | REST Assured API implementation |
+| auth | Authentication utilities |
+| constants | Framework constants |
+| drivers | WebDriver lifecycle management |
+| factory | Browser and Driver Factory |
+| listeners | TestNG listeners & reporting |
+| pages | Page Object Model implementation |
+| specs | REST Assured specifications |
+| utilities | Common reusable utilities |
+| resources | Configuration, schemas & test data |
+| tests | UI & API automated test suites |
 
 ---
 
@@ -458,17 +471,38 @@ http://localhost:4444
 ```
 
 ---
+# 📸 Framework Screenshots
+
+| Jenkins Dashboard | SonarQube Dashboard |
+|-------------------|---------------------|
+| ![](docs/images/jenkins-dashboard.png) | ![](docs/images/sonarqube-dashboard.png) |
+
+| GitHub Actions | Selenium Grid |
+|----------------|---------------|
+| ![](docs/images/github-actions.png) | ![](docs/images/selenium-grid.png) |
+
+| Allure Report |
+|---------------|
+| ![](docs/images/allure-report.png) |
 
 # 📊 Reports & Code Quality
 
+The framework provides comprehensive reporting and static code quality analysis.
+
+### Reporting
+
 - ✅ Allure Reports
 - ✅ TestNG Reports
+- ✅ Jenkins Build Artifacts
 - ✅ Screenshots on Failure
-- ✅ Execution Logs (Log4j2)
+- ✅ Log4j2 Execution Logs
+
+### Code Quality
+
 - ✅ SonarQube Analysis
 - ✅ Checkstyle Validation
-- ✅ PMD Static Analysis
-- ✅ Jenkins Build Artifacts
+- ✅ PMD Static Code Analysis
+- ✅ Jenkins Quality Gates
 
 ---
 
