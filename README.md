@@ -2,6 +2,18 @@
 
 ![Enterprise Automation CI](https://github.com/mridul-980/enterprise-hybrid-automation-framework/actions/workflows/automation.yml/badge.svg)
 
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Selenium](https://img.shields.io/badge/Selenium-4-brightgreen)
+![TestNG](https://img.shields.io/badge/TestNG-Testing-red)
+![REST Assured](https://img.shields.io/badge/REST_Assured-API_Testing-blue)
+![Maven](https://img.shields.io/badge/Maven-Build_C81A36)
+![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED)
+![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD-D24939)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automation-2088FF)
+![SonarQube](https://img.shields.io/badge/SonarQube-Code_Quality-4E9BCD)
+![Allure](https://img.shields.io/badge/Allure-Reporting-FF69B4)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 > **A production-ready Enterprise Hybrid Test Automation Framework built using Java, Selenium WebDriver, TestNG, REST Assured, Docker, Selenium Grid, Jenkins, GitHub Actions, SonarQube, Checkstyle, PMD, and Allure Reporting.**
 
 Designed with **scalability**, **maintainability**, and **enterprise engineering best practices**, this framework supports end-to-end automation across UI, API, and containerized environments while integrating modern CI/CD and code quality tools.
