@@ -535,7 +535,7 @@ Software QA Engineer | SDET | Test Automation Engineer
 
 - GitHub: https://github.com/mridul-980
 - LinkedIn: https://www.linkedin.com/in/mridul-tripathi-32ab3921b/
-- Email: mridultripathi024@gmail.com
+- Email: mridultripathi204@gmail.com
 
 ---
 
