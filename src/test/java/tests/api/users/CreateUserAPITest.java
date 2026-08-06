@@ -1,4 +1,4 @@
-package tests;
+package tests.api.users;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;

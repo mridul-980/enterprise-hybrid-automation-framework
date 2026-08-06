@@ -1,4 +1,4 @@
-package tests;
+package tests.ui.inventory;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

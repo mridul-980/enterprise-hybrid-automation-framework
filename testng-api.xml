@@ -6,14 +6,13 @@
 
         <classes>
 
-            <class name="tests.GetUserAPITest"/>
-    
-            <class name="tests.CreateUserAPITest"/>
-            <class name="tests.UpdateUserAPITest"/>
-            <class name="tests.DeleteUserAPITest"/>
-            <class name="tests.PatchUserAPITest"/>
-            <class name="tests.PathParamAPITest"/>
-            <class name="tests.QueryParamAPITest"/>   
+            <class name="tests.api.users.GetUserAPITest"/>
+            <class name="tests.api.users.CreateUserAPITest"/>
+            <class name="tests.api.users.UpdateUserAPITest"/>
+            <class name="tests.api.users.DeleteUserAPITest"/>
+            <class name="tests.api.users.PatchUserAPITest"/>
+            <class name="tests.api.users.PathParamAPITest"/>
+            <class name="tests.api.users.QueryParamAPITest"/>   
 
         </classes>
 

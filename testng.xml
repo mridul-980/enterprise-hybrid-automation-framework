@@ -15,8 +15,8 @@
         <parameter name="browser" value="chrome"/>
 
         <classes>
-            <class name="tests.LoginTest"/>
-            <class name="tests.InventoryTest"/>
+            <class name="tests.ui.login.LoginTest"/>
+            <class name="tests.ui.inventory.InventoryTest"/>
         </classes>
 
     </test>
