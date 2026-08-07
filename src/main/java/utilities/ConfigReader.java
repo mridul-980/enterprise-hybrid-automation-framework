@@ -45,4 +45,10 @@ public class ConfigReader {
 
         return properties.getProperty(key);
     }
+
+	public static int getExplicitWait() {
+		 return Integer.parseInt(getProperty("explicit.wait"));
+	
+	}
+
 }
