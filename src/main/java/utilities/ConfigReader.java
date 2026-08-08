@@ -21,6 +21,7 @@ public class ConfigReader {
                 "src/test/resources/config/"
                         + environment
                         + ".properties";
+        System.out.println(filePath);
 
         try {
 
@@ -44,11 +45,57 @@ public class ConfigReader {
         }
 
         return properties.getProperty(key);
+        
+    }
+    /**
+     * Returns the application URL.
+     *
+     * @return application base URL
+     */
+    public static String getBaseUrl() {
+        return getProperty("url");
     }
 
-	public static int getExplicitWait() {
-		 return Integer.parseInt(getProperty("explicit.wait"));
-	
+    /**
+     * Returns the default username.
+     *
+     * @return application username
+     */
+    public static String getUsername() {
+        return getProperty("username");
+    }
+
+    /**
+     * Returns the default password.
+     *
+     * @return application password
+     */
+    public static String getPassword() {
+        return getProperty("password");
+    }
+
+	public static String getBrowser() {
+	    return getProperty("browser");
 	}
+
+	public static String getExecutionType() {
+	    return getProperty("execution.type");
+	}
+
+	public static boolean isHeadless() {
+	    return Boolean.parseBoolean(getProperty("headless"));
+	}
+
+	public static int getExplicitWait() {
+	    String value = getProperty("explicit.wait");
+
+	    if (value == null) {
+	        throw new IllegalStateException(
+	            "Property 'explicit.wait' is missing in the configuration file.");
+	    }
+
+	    return Integer.parseInt(value);
+	}
+	
 
 }

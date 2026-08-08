@@ -9,25 +9,23 @@ import pages.LoginPage;
 import utilities.ConfigReader;
 
 public class LoginTest extends BaseTest {
+	
+	@Test(
+			description = "Verify user can login with valid credentials",
+			groups = {"smoke","regression"}
+			)
+	
+	public void verifyValidLogin() {
+		//Arrange
+		LoginPage loginPage = new LoginPage(driver);
+		
+		//Act
+		InventoryPage inventoryPage = loginPage.login(
+				ConfigReader.getUsername(),
+				ConfigReader.getPassword());
+		
+		//Assert
+		Assert.assertTrue(inventoryPage.isInventoryPageDisplayed(), "Inventory page was not displayed after successful login.");
+	}
 
-    @Test 
-    public void verifySuccessfulLogin() {
-
-        LoginPage loginPage =
-                new LoginPage();
-
-        InventoryPage inventoryPage =
-                new InventoryPage();
-
-        loginPage.loginToApplication(
-                ConfigReader.getProperty("username"),
-                ConfigReader.getProperty("password"));
-
-        String actualText =
-                inventoryPage.getProductsPageTitle();
-
-        Assert.assertEquals(
-                actualText,
-                "Products");
-    }
 }

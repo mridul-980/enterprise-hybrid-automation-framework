@@ -1,60 +1,74 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-import factory.DriverFactory;
-import utilities.Log;
+public class LoginPage extends BasePage {
+	
+	private static final By USERNAME_TEXTBOX = By.id("user-name");
+	
+	private static final By PASSWORD_TEXTBOX = By.id("password");
+	
+	private static final By LOGIN_BUTTON = By.id("login-button");
+	
+	private static final By ERROR_MESSAGE = By.cssSelector("h3[data-test='error']");
+	
+	private static final By MENU_BUTTON = By.id("react-burger-menu-btn");
+	
+	private static final By LOGOUT_LINK =  By.id("logout_sidebar_link");
+	
+	
+	public LoginPage(final WebDriver driver) {
+		super(driver);
+	}
+	
+	public void enterUsername(final String username) {
+		clearAndType(USERNAME_TEXTBOX, username);
+	}
+	
+	public void enterPassword(final String password) {
+		clearAndType(PASSWORD_TEXTBOX, password);
+	}
+	
+	public void clickLogin() {
+		click(LOGIN_BUTTON);
+	}
+	
+	/**
+	 * Performs login using valid user credentials.
+	 *
+	 * @param username application username
+	 * @param password application password
+	 * @return InventoryPage after successful login
+	 */
+	
+	public InventoryPage login(
+	        final String username,
+	        final String password) {
 
-public class LoginPage {
+	    enterUsername(username);
+	    enterPassword(password);
+	    clickLogin();
 
-    // Locators
+	    return new InventoryPage(driver);
+	}
+	
+	public String getErrorMessage() {
+	    return getText(ERROR_MESSAGE);
+	}
+	
+	public boolean isErrorDisplayed() {
+	    return isDisplayed(ERROR_MESSAGE);
+	}
+	
+	
+	 // Locators
 
-    private By usernameField =
-            By.id("user-name");
-
-    private By passwordField =
-            By.id("password");
-
-    private By loginButton =
-            By.id("login-button");
+    // Constructor
 
     // Actions
 
-    public void enterUsername(String username) {
+    // Business Methods
 
-        DriverFactory.getDriver()
-                .findElement(usernameField)
-                .sendKeys(username);
-    }
-
-    public void enterPassword(String password) {
-
-        DriverFactory.getDriver()
-                .findElement(passwordField)
-                .sendKeys(password);
-    }
-
-    public void clickLoginButton() {
-
-        DriverFactory.getDriver()
-                .findElement(loginButton)
-                .click();
-    }
-
-    public void loginToApplication(
-            String username,
-            String password) {
-    	
-    	Log.info("Entering username");
-
-        enterUsername(username);
-        
-        Log.info("Entering password");
-
-        enterPassword(password);
-
-        clickLoginButton();
-        
-        Log.info("Login operation completed");
-    }
+    // Validation Methods
 }

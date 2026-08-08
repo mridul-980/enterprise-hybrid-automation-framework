@@ -32,20 +32,20 @@ public class RuntimeConfig {
     }
     public static ExecutionType getExecutionType() {
 
-        String execution =
-                System.getProperty("execution");
+        String execution = System.getProperty("execution");
 
-        if (execution != null &&
-                !execution.isEmpty()) {
-
-            return ExecutionType.valueOf(
-                    execution.toUpperCase());
+        if (execution != null && !execution.isBlank()) {
+            return ExecutionType.valueOf(execution.toUpperCase());
         }
 
-        return ExecutionType.valueOf(
-                ConfigReader
-                        .getProperty("execution")
-                        .toUpperCase());
+        execution = ConfigReader.getProperty("execution");
+
+        if (execution == null || execution.isBlank()) {
+            throw new IllegalStateException(
+                    "Property 'execution' is missing in qa.properties");
+        }
+
+        return ExecutionType.valueOf(execution.toUpperCase());
     }
     public static String getRemoteUrl() {
 
