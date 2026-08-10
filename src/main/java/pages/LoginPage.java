@@ -46,15 +46,36 @@ public class LoginPage extends BasePage {
 	        final String username,
 	        final String password) {
 
-	    enterUsername(username);
-	    enterPassword(password);
-	    clickLogin();
+	    performLogin(username, password);
 
 	    return new InventoryPage(driver);
 	}
+	/**
+	 * Performs the login action.
+	 *
+	 * @param username application username
+	 * @param password application password
+	 */
+	private void performLogin(
+	        final String username,
+	        final String password) {
+
+	    enterUsername(username);
+	    enterPassword(password);
+	    clickLogin();
+	}
 	
-	public String getErrorMessage() {
-	    return getText(ERROR_MESSAGE);
+	public LoginPage attemptLogin(
+	        final String username,
+	        final String password) {
+
+	    performLogin(username, password);
+
+	    return this;
+	}
+	
+	public boolean hasErrorMessage() {
+	    return isErrorDisplayed();
 	}
 	
 	public boolean isErrorDisplayed() {
