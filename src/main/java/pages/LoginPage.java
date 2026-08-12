@@ -13,10 +13,6 @@ public class LoginPage extends BasePage {
 	
 	private static final By ERROR_MESSAGE = By.cssSelector("h3[data-test='error']");
 	
-	private static final By MENU_BUTTON = By.id("react-burger-menu-btn");
-	
-	private static final By LOGOUT_LINK =  By.id("logout_sidebar_link");
-	
 	
 	public LoginPage(final WebDriver driver) {
 		super(driver);
@@ -65,6 +61,16 @@ public class LoginPage extends BasePage {
 	    clickLogin();
 	}
 	
+	/**
+	 * Attempts to log in using the supplied credentials.
+	 * This method is intended for negative login scenarios
+	 * where the user remains on the Login page.
+	 *
+	 * @param username application username
+	 * @param password application password
+	 * @return current LoginPage instance
+	 */
+	
 	public LoginPage attemptLogin(
 	        final String username,
 	        final String password) {
@@ -75,11 +81,16 @@ public class LoginPage extends BasePage {
 	}
 	
 	public boolean hasErrorMessage() {
-	    return isErrorDisplayed();
+	    return isDisplayed(ERROR_MESSAGE);
 	}
 	
-	public boolean isErrorDisplayed() {
-	    return isDisplayed(ERROR_MESSAGE);
+	public String getErrorMessage() {
+	    return getText(ERROR_MESSAGE);
+	}
+	
+	public boolean isLoginButtonDisplayed() {
+
+	    return isDisplayed(LOGIN_BUTTON);
 	}
 	
 	

@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import base.BaseTest;
 import constants.TestData;
 import constants.TestMessages;
+import dataproviders.LoginDataProvider;
+import model.LoginTestData;
 import pages.InventoryPage;
 import pages.LoginPage;
 import utilities.ConfigReader;
@@ -31,111 +33,106 @@ public class LoginTest extends BaseTest {
 	}
 	
 	@Test(
-	        description = "Verify login with invalid username",
+	        dataProvider = "invalidLoginData",
+	        dataProviderClass = LoginDataProvider.class,
+	        description = "Verify invalid login scenarios",
 	        groups = {"regression"}
 	)
-	public void verifyLoginWithInvalidUsername() {
+	public void verifyInvalidLogin(final LoginTestData data) {
 
 	    // Arrange
 	    LoginPage loginPage = new LoginPage(driver);
 
 	    // Act
 	    loginPage.attemptLogin(
-	            TestData.INVALID_USERNAME,
-	            ConfigReader.getPassword());
+	            data.getUsername(),
+	            data.getPassword());
 
 	    // Assert
 	    Assert.assertTrue(
-	            loginPage.isErrorDisplayed(),
-	            "Error message should be displayed.");
+	            loginPage.hasErrorMessage(),
+	            data.getTestCaseId() + " - Error message was not displayed.");
 
-	    Assert.assertTrue(loginPage.hasErrorMessage());
+	    Assert.assertEquals(
+	            loginPage.getErrorMessage(),
+	            data.getExpectedMessage(),
+	            data.getTestCaseId() + " failed.");
 	}
 	
 	@Test(
-	        description = "Verify login with invalid password",
+	        description = "Verify locked user cannot login",
 	        groups = {"regression"}
 	)
-	public void verifyLoginWithInvalidPassword() {
+	public void verifyLockedUserCannotLogin() {
 
 	    // Arrange
 	    LoginPage loginPage = new LoginPage(driver);
 
 	    // Act
 	    loginPage.attemptLogin(
-	            ConfigReader.getUsername(),
-	            TestData.INVALID_PASSWORD);
-
-	    // Assert
-	    Assert.assertTrue(
-	            loginPage.isErrorDisplayed(),
-	            "Error message should be displayed.");
-
-	    Assert.assertTrue(loginPage.hasErrorMessage());
-	}
-	
-	@Test( 
-			description = "Verfiy login with invalid username and password",
-	        groups = {"regression"}
-	)
-	public void verifyLoginWithInvalidUsernameAndPassword()
-	{
-	    // Arrange
-	    LoginPage loginPage = new LoginPage(driver);
-
-	    // Act
-	    loginPage.attemptLogin(
-	            TestData.INVALID_USERNAME,
-	            TestData.INVALID_PASSWORD);
-
-	    // Assert
-	    Assert.assertTrue(
-	            loginPage.isErrorDisplayed(),
-	            "Error message should be displayed.");
-
-	    Assert.assertTrue(loginPage.hasErrorMessage());
-	}
-	
-	@Test ( description = "Verify login with empty username",
-				        groups = {"regression"}
-	)
-	public void verifyLoginWithEmptyUsername()
-	{
-	    // Arrange
-	    LoginPage loginPage = new LoginPage(driver);
-
-	    // Act
-	    loginPage.attemptLogin(
-	            "",
+	            TestData.LOCKED_USER,
 	            ConfigReader.getPassword());
 
 	    // Assert
 	    Assert.assertTrue(
-	            loginPage.isErrorDisplayed(),
-	            "Error message should be displayed.");
+	            loginPage.hasErrorMessage(),
+	            "Locked user error message was not displayed.");
 
-	    Assert.assertTrue(loginPage.hasErrorMessage());
+	    Assert.assertEquals(
+	            loginPage.getErrorMessage(),
+	            TestMessages.LOCKED_USER,
+	            "Incorrect locked user error message.");
 	}
 	
-	@Test ( description = "Verify login with empty password",
-				        groups = {"regression"}
+	@Test(
+	        description = "Verify user can logout successfully",
+	        groups = {"smoke", "regression"}
 	)
-	public void verifyLoginWithEmptyPassword()
-	{
+	public void verifyLogout() {
+
 	    // Arrange
 	    LoginPage loginPage = new LoginPage(driver);
 
 	    // Act
-	    loginPage.attemptLogin(
-	            ConfigReader.getUsername(),
-	            "");
+	    InventoryPage inventoryPage =
+	            loginPage.login(
+	                    ConfigReader.getUsername(),
+	                    ConfigReader.getPassword());
+
+	    LoginPage loggedOutPage =
+	            inventoryPage.logout();
 
 	    // Assert
 	    Assert.assertTrue(
-	            loginPage.isErrorDisplayed(),
-	            "Error message should be displayed.");
-
-	    Assert.assertTrue(loginPage.hasErrorMessage());
+	            loggedOutPage.isLoginButtonDisplayed(),
+	            "Login page was not displayed after logout.");
 	}
+	
+	@Test(
+	        description = "Verify session is terminated after logout",
+	        groups = {"regression"}
+	)
+	public void verifySessionAfterLogout() {
 
+	    // Arrange
+	    LoginPage loginPage = new LoginPage(driver);
+
+	    InventoryPage inventoryPage =
+	            loginPage.login(
+	                    ConfigReader.getUsername(),
+	                    ConfigReader.getPassword());
+
+	    LoginPage loggedOutPage =
+	            inventoryPage.logout();
+
+	    // Act
+	    loggedOutPage.navigateBack();
+
+	    // Assert
+	    Assert.assertTrue(
+	            loggedOutPage.isLoginButtonDisplayed(),
+	            "User session should not remain active after logout.");
+	    Assert.assertFalse(
+	    	    inventoryPage.isInventoryPageDisplayed());
+	}
 }

@@ -215,7 +215,7 @@ public abstract class BasePage {
 	/**
 	 * Navigates to the previous page.
 	 */
-	protected void navigateBack() {
+	public void navigateBack() {
 		driver.navigate().back();
 	}
 

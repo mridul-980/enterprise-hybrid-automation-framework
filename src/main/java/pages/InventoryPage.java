@@ -14,5 +14,25 @@ public class InventoryPage extends BasePage {
     public InventoryPage(final WebDriver driver) {
         super(driver);
     }
+    
+    private static final By MENU_BUTTON =
+            By.id("react-burger-menu-btn");
+
+    private static final By LOGOUT_LINK =
+            By.id("logout_sidebar_link");
+    
+    public LoginPage logout() {
+
+        click(MENU_BUTTON);
+
+        waitForVisibility(LOGOUT_LINK);
+
+        click(LOGOUT_LINK);
+
+//        System.out.println("Current URL: " + driver.getCurrentUrl());
+//        System.out.println("Page Title: " + driver.getTitle());
+
+        return new LoginPage(driver);
+    }
 
 }
