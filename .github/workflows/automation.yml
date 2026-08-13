@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
   pull_request:
     branches:
       - main
@@ -34,20 +35,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven
 
-      - name: Build Project
+      - name: Compile Project
         run: mvn -B clean compile
 
-      - name: Run API Tests
-        run: mvn test -Dsurefire.suiteXmlFiles=testng-api.xml
+      - name: Run API Test Suite
+        run: mvn -B test -Dsurefire.suiteXmlFiles=testng-api.xml
 
-      - name: Upload Test Reports
+      - name: Upload Test Artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: automation-test-reports
           path: |
-		   target/surefire-reports/
-		   allure-results/
+            target/surefire-reports/
+            allure-results/
             test-output/
             reports/
             logs/
